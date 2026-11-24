@@ -124,6 +124,16 @@ tr:hover td{background:rgba(245,154,35,.06)}
 #bcOv.show{display:flex;flex-direction:column;gap:22px}
 #bcCd{min-width:64px;padding:6px 18px;border-radius:999px;background:var(--card);color:var(--ink);font-weight:800;font-size:clamp(20px,4vw,34px);text-align:center;box-shadow:0 6px 30px rgba(0,0,0,.35)}
 #bcText{max-width:92vw;padding:28px 36px;border-radius:20px;background:var(--card);color:var(--ink);text-align:center;font-weight:800;font-size:clamp(28px,7vw,72px);line-height:1.4;box-shadow:0 12px 60px rgba(0,0,0,.45);word-break:break-word}
+.fold.card{padding:0;overflow:hidden}
+.fold.nest{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:var(--bg)}
+.fh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 16px;cursor:pointer;user-select:none}
+.fh:hover{background:color-mix(in srgb,var(--java) 6%,transparent)}
+.fa::before{content:'◂';display:inline-block;transition:transform .2s;color:var(--mute);font-size:16px}
+.fold.open .fa::before{transform:rotate(-90deg)}
+.ft{flex:1;min-width:140px}.ft b{font-size:16px}.fd{font-size:13px;margin-top:3px;line-height:1.5}
+.fx{display:flex;gap:6px;flex-wrap:wrap}
+.fb{padding:0 16px 16px}
+.fold:not(.open) .fb{display:none}
 .snip{direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-word;font-family:'Fira Code',Consolas,monospace;font-size:14px;line-height:1.6;background:#0f1722;color:#e6edf3;border-radius:10px;padding:12px 14px;margin:8px 0 0;overflow-x:auto;user-select:text}
 .con{margin-top:8px}
 .conpre{background:#0b121b;color:#d7e2f0;direction:ltr;text-align:left;font-family:'Fira Code',Consolas,monospace;font-size:14px;line-height:1.6;border-radius:10px;padding:12px 14px;margin:0;white-space:pre-wrap;word-break:break-word;min-height:44px;user-select:text}
@@ -740,10 +750,10 @@ function labView(){
     const st=done?`<div class="why">🎉 عاش! المدرس قبل حلك. +${(me().cp||{})[c.id]??POINTS_C} نقطة${s&&s.note?'<br>ملاحظة المدرس: '+ltr(s.note):''}</div>`
       :pend?'<div class="why">⏳ اتبعت للمدرس. اشرب مايه لحد ما يراجعه 😄.</div>'
       :s&&s.st==='bad'?`<div class="why bad">✘ المدرس رفض الحل المرة دي ومفيش نقاط، بس ولا يهمك.<br>السبب: ${ltr(s.note||'-')}<br>عدّل الكود وابعته تاني.</div>`:'';
-    return `<div class="card"><h3>${ltr(c.title)}${done?'<span class="tag" style="color:var(--ok)">تم +'+((me().cp||{})[c.id]??POINTS_C)+'</span>':''}</h3><p>${ltr(c.task)}</p>${st}
-      ${c.cls?`<div class="mute" dir="ltr" style="text-align:left;margin-top:8px">📄 ${esc(c.cn||'Student')}.java</div><textarea class="code" id="ed-${c.id}-k" spellcheck="false" data-ed data-pair="${c.id}" ${lock?'data-ro="1"':''}>${esc(DRAFT[k+'-k']??(s&&s.k)??c.cls)}</textarea><div class="mute" dir="ltr" style="text-align:left;margin-top:8px">📄 Main.java</div>`:''}<textarea class="code" id="ed-${c.id}" spellcheck="false" data-ed ${c.cls?`data-pair="${c.id}"`:''} ${lock?'data-ro="1"':''}>${esc(DRAFT[k]||(c.cls?(s&&s.m):(s&&s.code))||c.starter)}</textarea>
+      return foldCard('c:'+c.id,ltr(c.title),c.task,(done?'<span class="tag" style="color:var(--ok)">تم +'+((me().cp||{})[c.id]??POINTS_C)+'</span>':pend?'<span class="tag">⏳ مستني المراجعة</span>':s&&s.st==='bad'?'<span class="tag" style="color:var(--bad)">✘ مرفوض</span>':''),'',`<p>${ltr(c.task)}</p>${st}
+      ${c.cls?`<div class="mute" dir="ltr" style="text-align:left;margin-top:8px">📄 ${esc(c.cn||'Student')}.java</div><textarea class="code" id="ed-${c.id}-k" spellcheck="false" data-ed data-pair="${c.id}" ${lock?'data-ro="1"':''}>${esc(DRAFT[k+'-k']??(s&&s.k)??c.cls)}</textarea><div class="mute" dir="ltr" style="text-align:left;margin-top:8px">📄 Main.java</div>`:''}${c.ac&&!c.cls?'<div class="mute" dir="ltr" style="text-align:left;margin-top:8px">📄 Main.java</div>':''}<textarea class="code" id="ed-${c.id}" spellcheck="false" data-ed ${c.cls||c.ac?`data-pair="${c.id}"`:''} ${lock?'data-ro="1"':''}>${esc(DRAFT[k]||(s&&(s.m!==undefined?s.m:s.code))||c.starter)}</textarea>${xcBlock(c,k,s,lock)}
     <div class="row"><button class="ghost" onclick="runIt('${c.id}')">تشغيل وتجربة</button><button class="ghost" onclick="dbgLab('${c.id}')">🐞 Debug</button>${lock?'':`<button onclick="sendC('${c.id}')">إرسال للمدرس</button>`}${pend?`<button class="ghost" onclick="unsend('${c.id}')">سحب الإرسال عشان أعدّل</button>`:''}</div>
-    <p class="mute">التشغيل للتجربة بس ومش بيتحسب. لما تتأكد من حلك ابعته للمدرس.</p><div id="out-${c.id}" data-ok="${k}">${OUT[k]||''}</div></div>`}).join('')}
+    <p class="mute">التشغيل للتجربة بس ومش بيتحسب. لما تتأكد من حلك ابعته للمدرس.</p><div id="out-${c.id}" data-ok="${k}">${OUT[k]||''}</div>`)}).join('')}
 const KW=['public','private','static','void','class','if','else','for','while','do','return','break','continue','new','true','false','null','final','int','double','long','float','boolean','char','String','Scanner','ArrayList','List','Random','JOptionPane','import','switch','case','default','try','catch','finally','throw','System','Math','Integer','Double','Character','args'];
 const MEM={System:['out','in','err','exit'],JOptionPane:['showInputDialog','showMessageDialog','showConfirmDialog','INFORMATION_MESSAGE','ERROR_MESSAGE','WARNING_MESSAGE','QUESTION_MESSAGE','PLAIN_MESSAGE','YES_NO_OPTION','YES_NO_CANCEL_OPTION','OK_CANCEL_OPTION','YES_OPTION','NO_OPTION','CANCEL_OPTION'],'System.out':['println','print','printf'],Math:['abs','max','min','pow','sqrt','floor','ceil','round','random','PI'],Integer:['parseInt','valueOf','MAX_VALUE','MIN_VALUE'],Double:['parseDouble'],String:['valueOf','format'],Character:['isDigit','isLetter','isUpperCase','isLowerCase','toUpperCase','toLowerCase']};
 const SM=['length','charAt','substring','equals','equalsIgnoreCase','toUpperCase','toLowerCase','indexOf','contains','isEmpty','trim','startsWith','endsWith','replace','compareTo','concat'],SCM=['nextInt','nextLine','next','nextDouble','nextBoolean','hasNext','hasNextInt','hasNextLine','close'],FLD=new Set(['out','in','err','PI','MAX_VALUE','MIN_VALUE','INFORMATION_MESSAGE','ERROR_MESSAGE','WARNING_MESSAGE','QUESTION_MESSAGE','PLAIN_MESSAGE','YES_NO_OPTION','YES_NO_CANCEL_OPTION','OK_CANCEL_OPTION','YES_OPTION','NO_OPTION','CANCEL_OPTION']);
@@ -887,10 +897,10 @@ function jChip(cm,e){let c=cm.jchip;
   c.appendChild(s);c.appendChild(b)}
 function jClear(cm){if(cm.jchip)cm.jchip.style.display='none';(cm.jm||[]).forEach(m=>m.clear());cm.jm=[];if(cm.jl!=null){cm.removeLineClass(cm.jl,'background','errline');cm.jl=null}}
 function jMark(cm,e,ln){jClear(cm);if(!e||e.line===undefined)return;const d=cm.getDoc(),a=d.posFromIndex(e.from),b=d.posFromIndex(Math.max(e.to,e.from+1));cm.jm=[cm.markText(a,b,{className:'jsq',title:e.message+(e.imp?'\n💡 اضغط على الخط الأحمر لإضافة الـ import':'')})];cm.jerr=e;if(e.imp)jClk(cm);jChip(cm,e);if(ln){cm.addLineClass(a.line,'background','errline');cm.jl=a.line}}
-function jall(cm){const t=cm.getTextArea&&cm.getTextArea(),s=cm.getValue();if(t&&t.dataset&&t.dataset.pair){const B=lbuild(t.dataset.pair);return{c:B.c,o:t.id.endsWith('-k')?B.ko:B.o,n:s.length,p:1}}
+function jall(cm){const t=cm.getTextArea&&cm.getTextArea(),s=cm.getValue();if(t&&t.dataset&&t.dataset.pair){const B=lbuild(t.dataset.pair);return{c:B.c,o:t.dataset.xn?((B.x||[]).find(q=>q.n===t.dataset.xn)||{o:0}).o:t.id.endsWith('-k')?B.ko:B.o,n:s.length,p:1}}
   if(!(t&&t.id==='pg-ed'))return{c:s,o:0,n:s.length,p:0};const f=pgCur();f.code=s;const m=pgCode(f);return{c:m,o:Math.max(0,m.indexOf(s)),n:s.length,p:1}}
 function jLint(cm){if(!cm.getWrapperElement().isConnected)return;try{const a=jall(cm);runJava(a.c,'',{lint:1});jClear(cm)}catch(e){if(e instanceof JErr){const a=jall(cm);if(a.p&&e.message==='مفيش دالة main'){jClear(cm);return}if(a.p&&e.from!==undefined){if(e.from<a.o||e.from>=a.o+a.n){jClear(cm);return}e.from-=a.o;e.to-=a.o}jMark(cm,e,0)}else jClear(cm)}}
-function jRun(k,e){try{const t=String(k).startsWith('pg|')?$('#pg-ed'):String(k).startsWith('rv|')?null:$('#ed-'+String(k).slice(S.user.length+1));if(t&&t.cm&&e instanceof JErr){const tk=$('#'+t.id+'-k');if(tk&&tk.cm&&e.from!==undefined){const B=lbuild(t.id.slice(3));if(e.from>=B.ko){jMark(tk.cm,{message:e.message,imp:e.imp,line:e.line,from:e.from-B.ko,to:e.to-B.ko},1);return}e={message:e.message,imp:e.imp,line:e.line,from:Math.max(0,e.from-B.o),to:Math.max(0,e.to-B.o)}}jMark(t.cm,e,1)}}catch(x){}}
+function jRun(k,e){try{const t=String(k).startsWith('pg|')?$('#pg-ed'):String(k).startsWith('rv|')?null:$('#ed-'+String(k).slice(S.user.length+1));if(t&&t.cm&&e instanceof JErr){const tk=$('#'+t.id+'-k'),xe=[...document.querySelectorAll('textarea[data-xof="'+t.id.slice(3)+'"]')];if((tk&&tk.cm||xe.length)&&e.from!==undefined){const B=lbuild(t.id.slice(3)),L=[];if(tk&&tk.cm&&B.ko!==undefined)L.push([B.ko,tk]);(B.x||[]).forEach(q=>{const z=xe.find(y=>y.dataset.xn===q.n);if(z)L.push([q.o,z])});const hit=L.filter(z=>e.from>=z[0]).sort((a,b)=>b[0]-a[0])[0];if(hit&&hit[1].cm){jMark(hit[1].cm,{message:e.message,imp:e.imp,line:e.line,from:e.from-hit[0],to:e.to-hit[0]},1);return}e={message:e.message,imp:e.imp,line:e.line,from:Math.max(0,e.from-B.o),to:Math.max(0,e.to-B.o)}}jMark(t.cm,e,1)}}catch(x){}}
 function runJava(src,inp,opt){opt=opt||{};const ps=opt.ps={};try{return runJava0(src,inp,opt)}catch(e){if(e instanceof JErr&&e.line===undefined){let a=ps.at;const s=ps.f&&ps.f();if(!a&&s&&s.TP.length){const i=Math.max(0,Math.min(s.run?s.cur:s.p-1,s.TP.length-1));a=[s.TP[i],s.TE[i]]}if(a){e.from=a[0];e.to=a[1];e.line=src.slice(0,a[0]).split('\n').length-1}}throw e}}
 function runJava0(src,inp,opt){opt=opt||{};const L=!!opt.live,IMP=new Set(),PK={Scanner:'java.util',JOptionPane:'javax.swing',ArrayList:'java.util',List:'java.util',Random:'java.util'},dl=opt.dlg||[];let di=0,echoed=0;
   const rnd=(()=>{let a=(opt.seed||123456789)>>>0;return()=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}})();
@@ -1188,8 +1198,25 @@ function runJava0(src,inp,opt){opt=opt||{};const L=!!opt.live,IMP=new Set(),PK={
   return out}
 
   function lmerge(m,k){let imp='';const kb=k.replace(/^[ \t]*import\s+[^;\n]+;/gm,x=>{imp+=x.trim();return x.replace(/[^\n]/g,' ')});return{c:imp+m+'\n'+kb,o:imp.length,ko:imp.length+m.length+1}}
-function lbuild(id){const g=x=>{const t=$(x);return t?(t.cm?t.cm.getValue():t.value):null},m=g('#ed-'+id)||'',k=g('#ed-'+id+'-k');if(k==null)return{c:m,o:0,m,k:null,nl:0};return Object.assign(lmerge(m,k),{m,k,nl:m.split('\n').length})}
-const lrun=s=>s&&s.m!==undefined&&s.k!==undefined?lmerge(s.m,s.k).c:s.code;
+  function lmergeN(m,ks){let imp='';const bs=ks.map(k=>k.replace(/^[ \t]*import\s+[^;\n]+;/gm,x=>{imp+=x.trim();return x.replace(/[^\n]/g,' ')}));let c=imp+m;const offs=[];bs.forEach(b=>{c+='\n';offs.push(c.length);c+=b});return{c,o:imp.length,offs}}
+function lbuild(id){const g=x=>{const t=$(x);return t?(t.cm?t.cm.getValue():t.value):null},m=g('#ed-'+id)||'',k=g('#ed-'+id+'-k'),xs=[...document.querySelectorAll('textarea[data-xof="'+id+'"]')].map(t=>({n:t.dataset.xn,s:t.cm?t.cm.getValue():t.value}));if(k==null&&!xs.length)return{c:m,o:0,m,k:null,nl:0,x:[]};const r=lmergeN(m,(k==null?[]:[k]).concat(xs.map(q=>q.s)));let i=0;const ko=k==null?undefined:r.offs[i++];xs.forEach(q=>{q.o=r.offs[i++]});return{c:r.c,o:r.o,ko,m,k,nl:m.split('\n').length,x:xs}}
+function xcTpl(n){return 'public class '+n+' {\n    \n}'}
+function xcNames(c,k,s){return DRAFT[k+'-xl']||((s&&s.xs)||[]).map(q=>q.n)}
+function xcBlock(c,k,s,lock){if(!c.ac)return '';
+  const ns=xcNames(c,k,s),sx=(s&&s.xs)||[];
+  return ns.map(n=>`<div class="row" style="margin-top:10px"><span class="mute" dir="ltr" style="flex:1;text-align:left">📄 ${esc(n)}.java</span>${lock?'':`<button class="del sm" onclick="xcDel('${c.id}','${n}')">حذف الكلاس</button>`}</div><textarea class="code" id="ed-${c.id}-x-${n}" spellcheck="false" data-ed data-pair="${c.id}" data-xof="${c.id}" data-xn="${n}" ${lock?'data-ro="1"':''}>${esc(DRAFT[k+'-x-'+n]??(sx.find(q=>q.n===n)||{}).s??xcTpl(n))}</textarea>`).join('')
+  +(lock?'':`<div class="row" style="margin-top:12px"><input id="xn-${c.id}" dir="ltr" maxlength="30" placeholder="اسم الكلاس (مثال: Student)" style="flex:1;min-width:160px" onkeydown="if(event.key==='Enter')xcAdd('${c.id}')"><button class="ghost" onclick="xcAdd('${c.id}')">➕ إضافة كلاس</button></div>`)}
+function xcAdd(id){const c=D.challenges.find(x=>x.id===id),inp=$('#xn-'+id);if(!c||!c.ac||!inp)return;
+  const n=inp.value.trim(),k=S.user+'|'+id,s=(me().sub||{})[id];
+  if(!/^[A-Z][A-Za-z0-9_]*$/.test(n))return toast('اسم الكلاس لازم يبدأ بحرف إنجليزي كبير وبدون مسافات (مثال: Student)');
+  const ns=xcNames(c,k,s).slice(),bad=KW.concat(['Main','Object','Boolean','Long','Float','Byte','Short','Exception','Arrays','Collections','Map','HashMap','Set','HashSet','StringBuilder'],c.cls?[c.cn||'Student']:[],ns);
+  if(bad.some(z=>z.toLowerCase()===n.toLowerCase()))return toast('الاسم ده مستخدم أو محجوز، اختار اسم تاني');
+  ns.push(n);DRAFT[k+'-xl']=ns;DRAFT[k+'-x-'+n]=xcTpl(n);render();
+  setTimeout(()=>{const t=$('#ed-'+id+'-x-'+n);if(t)t.scrollIntoView({behavior:'smooth',block:'center'})},80)}
+async function xcDel(id,n){if(!await ask('تحذف كلاس '+n+'؟ الكود اللي فيه هيتمسح.',{title:'حذف كلاس',btn:'احذف'}))return;
+  const c=D.challenges.find(x=>x.id===id),k=S.user+'|'+id,s=(me().sub||{})[id];
+  DRAFT[k+'-xl']=xcNames(c,k,s).filter(z=>z!==n);delete DRAFT[k+'-x-'+n];render()}
+  const lrun=s=>s&&s.m!==undefined&&(s.k!==undefined||s.xs)?lmergeN(s.m,(s.k!==undefined?[s.k]:[]).concat((s.xs||[]).map(q=>q.s))).c:s.code;
 function runIt(id){try{const code=lbuild(id).c;conStart(S.user+'|'+id,code)}catch(e){alert('خطأ في التشغيل: '+(e&&e.message))}}
 /* ===== كونسول التشغيل (Scanner و JOptionPane) ===== */
 const CON={};
@@ -1230,15 +1257,16 @@ function bpInit(t,cm){if(!(t.id==='pg-ed'||(t.id.startsWith('ed-')&&!t.id.starts
   cm.on('change',c=>{BP[key]=bpLines(c)});
   const k=t.id==='pg-ed'?'pg|'+S.user+'|'+pgCur().id:S.user+'|'+t.id.slice(3),c=CON[k];if(c&&c.ps)dbgMark(k,c.ps.line)}
 function edOf(k){k=String(k);let t;if(k.startsWith('pg|')){if(k!=='pg|'+S.user+'|'+pgCur().id)return null;t=$('#pg-ed')}else if(k.startsWith('rv|'))return null;else t=$('#ed-'+k.slice(S.user.length+1));return t&&t.cm}
-function edsOf(k){const m=edOf(k);if(!m)return[];const kt=$('#'+m.getTextArea().id+'-k');return kt&&kt.cm?[m,kt.cm]:[m]}
-function dbgMark(k,ln){const a=edsOf(k);if(!a.length)return;dbgClear(k);let cm=a[0],l=ln;if(a[1]&&ln>=a[0].lineCount()){cm=a[1];l=ln-a[0].lineCount()}cm.addLineClass(l,'background','dbgline');cm.dl=l;cm.setOption('readOnly','nocursor');cm.scrollIntoView({line:l,ch:0},60)}
+function edsLab(id){const a=[],t=$('#ed-'+id);if(t&&t.cm)a.push(t.cm);const tk=$('#ed-'+id+'-k');if(tk&&tk.cm)a.push(tk.cm);document.querySelectorAll('textarea[data-xof="'+id+'"]').forEach(z=>{if(z.cm)a.push(z.cm)});return a}
+function edsOf(k){const m=edOf(k);if(!m)return[];const id=m.getTextArea().id;return id.startsWith('ed-')?edsLab(id.slice(3)):[m]}
+function dbgMark(k,ln){const a=edsOf(k);if(!a.length)return;dbgClear(k);let cm=a[0],l=ln;for(let i=1;i<a.length&&l>=cm.lineCount();i++){l-=cm.lineCount();cm=a[i]}cm.addLineClass(l,'background','dbgline');cm.dl=l;cm.setOption('readOnly','nocursor');cm.scrollIntoView({line:l,ch:0},60)}
 function dbgClear(k){edsOf(k).forEach(cm=>{if(cm.dl==null)return;cm.removeLineClass(cm.dl,'background','dbgline');cm.dl=null;cm.setOption('readOnly',cm.getTextArea().dataset.ro?'nocursor':false)})}
 function dbgStart(k,code,bps,lim){CON[k]={code,lines:[],dlg:[],eof:false,need:null,seed:(Math.random()*4294967296)|0,dbg:{bps:new Set(bps),mode:bps.length?'run':'step',at:0,depth:0,lim:lim||1e9}};conStep(k)}
-function dbgLab(id){const t=$('#ed-'+id);if(!t)return;const B=lbuild(id),tk=$('#ed-'+id+'-k');dbgStart(S.user+'|'+id,B.c,(t.cm?bpLines(t.cm):[]).concat(tk&&tk.cm?bpLines(tk.cm).map(x=>x+B.nl):[]))}
+function dbgLab(id){const t=$('#ed-'+id);if(!t)return;const B=lbuild(id);let off=0;const bs=[];edsLab(id).forEach(z=>{bpLines(z).forEach(x=>bs.push(x+off));off+=z.lineCount()});dbgStart(S.user+'|'+id,B.c,bs)}
 function pgDebug(){const f=pgCur(),t=$('#pg-ed');if(t&&t.cm)f.code=t.cm.getValue();pgSave();
   if(!/static\s+void\s+main/.test(f.code))return toast('افتح الملف اللي فيه main عشان تعمل Debug');
   dbgStart('pg|'+S.user+'|'+f.id,pgCode(f),t&&t.cm?bpLines(t.cm):[],f.code.split('\n').length)}
-function dbgGo(k,mode){const c=CON[k];if(!c||!c.ps||!c.dbg)return;const cm=edOf(k);if(cm){const a=edsOf(k);c.dbg.bps=new Set(bpLines(a[0]).concat(a[1]?bpLines(a[1]).map(x=>x+a[0].lineCount()):[]))}c.dbg.at=c.ps.sc;c.dbg.depth=c.ps.depth;c.dbg.mode=mode;conStep(k)}
+function dbgGo(k,mode){const c=CON[k];if(!c||!c.ps||!c.dbg)return;const cm=edOf(k);if(cm){const a=edsOf(k);{let off=0;const bs=[];a.forEach(z=>{bpLines(z).forEach(x=>bs.push(x+off));off+=z.lineCount()});c.dbg.bps=new Set(bs)}}c.dbg.at=c.ps.sc;c.dbg.depth=c.ps.depth;c.dbg.mode=mode;conStep(k)}
 function dbgStop(k){const c=CON[k];if(!c)return;const o=c.ps?c.ps.out:'';dbgClear(k);c.dbg=null;c.ps=null;c.need=null;const h=conHtml(k,o,true,'⏹ الـ Debug اتوقف',true);OUT[k]=h;const el=[...document.querySelectorAll('[data-ok]')].find(x=>x.dataset.ok===k);if(el)el.innerHTML=h}
 function dbgPanel(k,e){const c=CON[k],kk=String(k).replace(/'/g,''),pv=c.pv,nv={};
   const rows=e.vars.map(([t,n,v])=>{nv[n]=v;return '<tr><td>'+esc(t)+'</td><td>'+esc(n)+'</td><td'+(pv&&pv[n]!==v?' class="chg"':'')+'>'+esc(v)+'</td></tr>'}).join('');c.pv=nv;
@@ -1255,10 +1283,10 @@ function showJop(k,n){closeJop();const m=document.createElement('div');m.id='jmo
   else if(n.dk==='msg')add('OK',()=>done(1),true);
   else n.opts.forEach((l,j)=>add(l,()=>done(n.codes[j]),j===0));
   document.body.appendChild(m);const f=m.querySelector('#jin')||m.querySelector('button');setTimeout(()=>{if(f)f.focus()},30)}
-  async function sendC(id){const t=$('#ed-'+id),B=lbuild(id),code=(B.k==null?B.m:'// ===== Main.java =====\n'+B.m+'\n\n// ===== '+((D.challenges.find(x=>x.id===id)||{}).cn||'Student')+'.java =====\n'+B.k).trim(),u=me(),c=D.challenges.find(x=>x.id===id);
-  if(!code||(B.k==null?code===c.starter.trim():(B.m.trim()===c.starter.trim()&&B.k.trim()===(c.cls||'').trim())))return alert('اكتب حلك الأول.');
+  async function sendC(id){const t=$('#ed-'+id),B=lbuild(id),fs=[['Main',B.m]].concat(B.k==null?[]:[[((D.challenges.find(x=>x.id===id)||{}).cn||'Student'),B.k]],(B.x||[]).map(q=>[q.n,q.s])),code=(fs.length<2?B.m:fs.map(f=>'// ===== '+f[0]+'.java =====\n'+f[1]).join('\n\n')).trim(),u=me(),c=D.challenges.find(x=>x.id===id);
+    if(!code||(fs.length<2?code===c.starter.trim():(!(B.x||[]).length&&B.m.trim()===c.starter.trim()&&B.k!=null&&B.k.trim()===(c.cls||'').trim())))return alert('اكتب حلك الأول.');
   if(!await ask('تبعت الحل للمدرس؟ مش هتقدر تعدّل لحد ما يراجعه.',{title:'إرسال الحل',btn:'ابعت'}))return;
-  u.sub=u.sub||{};u.sub[id]=Object.assign({code,at:Date.now(),st:'pending'},B.k==null?{}:{m:B.m,k:B.k});DB.save({['sub/'+id]:u.sub[id]});render()}
+  u.sub=u.sub||{};u.sub[id]=Object.assign({code,at:Date.now(),st:'pending'},fs.length<2?{}:Object.assign({m:B.m},B.k==null?{}:{k:B.k},(B.x||[]).length?{xs:B.x.map(q=>({n:q.n,s:q.s}))}:{}));DB.save({['sub/'+id]:u.sub[id]});render()}
 function unsend(id){const u=me();if(u.sub&&u.sub[id]&&u.sub[id].st==='pending'){delete u.sub[id];DB.save({['sub/'+id]:null});render()}}
 
 function board(section){const arr=Object.values(D.users).filter(u=>!u.teacher&&!GH(u)).map(u=>({n:u.name,p:pts(u,section)}));arr.sort((a,b)=>b.p-a.p);return arr}
@@ -1386,7 +1414,8 @@ function tC(){if(!S.tsid)return emptyCard('➕','ابدأ بإضافة شرح ج
   const cs=D.challenges.filter(c=>c.sid===S.tsid);
   return `<div class="card"><h3>تمرين كود جديد</h3><label>العنوان</label><input id="ct"><label>المطلوب من الطالب</label><textarea id="ck" rows="3"></textarea>
   <label>كود البداية اللي هيظهر للطالب</label><textarea id="cs" class="code" spellcheck="false" data-ed>public class Main {\n    public static void main(String[] args) {\n        \n    }\n}</textarea>
-  <label>كلاس إضافي (اختياري): لو كتبت كود هنا الطالب هيشوف ملفين، الكلاس و Main</label><input id="cn" dir="ltr" placeholder="اسم الكلاس مثال: Student"><textarea id="cs2" class="code" spellcheck="false" data-ed></textarea>
+  <label style="display:flex;align-items:center;gap:8px;margin:12px 0"><input type="checkbox" id="cac" style="width:auto;margin:0"> ➕ إضافة كلاس: الطالب يقدر يضيف كلاسات بنفسه (بلا حد)</label>
+  <details ontoggle="if(this.open)this.querySelectorAll('.CodeMirror').forEach(c=>c.CodeMirror.refresh())"><summary class="mute" style="cursor:pointer">كلاس جاهز من عندي (اختياري - الطريقة القديمة)</summary><label>اسم الكلاس</label><input id="cn" dir="ltr" placeholder="اسم الكلاس مثال: Student"><textarea id="cs2" class="code" spellcheck="false" data-ed></textarea></details>
   <p class="mute">الطالب هيكتب حله ويجرّب ويشغّله، وبعدين يبعتهولك. إنت اللي بتقبل أو ترفض من تاب "مراجعة".</p>
   <button onclick="addC()">${S.ec?'حفظ التعديل':'إضافة التمرين'}</button>${S.ec?' <button class="ghost sm" onclick="S.ec=null;render()">إلغاء</button>':''}<span class="mute" id="cerr" style="color:var(--bad)"></span></div>
   <div class="card"><h3>التمارين (${cs.length})</h3>${cs.map(c=>`<div class="check row"><b style="flex:1">${esc(c.title)}</b><button class="ghost sm" onclick="S.att=S.att==='${c.id}'?null:'${c.id}';render()">👥 الحضور (${attOf(c.id).length})</button> <button class="ghost sm" onclick="editC('${c.id}')">✏️ تعديل</button> <button class="del sm" onclick="delC('${c.id}')">حذف</button></div>${S.att===c.id?attBox(c.id):''}`).join('')||'<span class="mute">لسه مفيش تمارين.</span>'}</div>`}
@@ -1394,11 +1423,11 @@ const gv=q=>{const e=$(q);return e.cm?e.cm.getValue():e.value};
 function addC(){const t=$('#ct').value.trim(),k=$('#ck').value.trim(),st=gv('#cs'),cl=gv('#cs2').trim()?gv('#cs2'):'',cn=$('#cn').value.trim()||'Student',er=m=>{$('#cerr').textContent=' '+m};
   if(!t||!k)return er('اكتب العنوان والمطلوب.');
   const ex=S.ec&&D.challenges.find(c=>c.id===S.ec);
-  if(ex){Object.assign(ex,{title:t,task:k,starter:st,cls:cl,cn});S.ec=null}
-  else D.challenges.push({id:uid('c'),sid:S.tsid,title:t,task:k,starter:st,cls:cl,cn});
+  if(ex){Object.assign(ex,{title:t,task:k,starter:st,cls:cl,cn,ac:$('#cac').checked?1:0});S.ec=null}
+  else D.challenges.push({id:uid('c'),sid:S.tsid,title:t,task:k,starter:st,cls:cl,cn,ac:$('#cac').checked?1:0});
   DB.save();render()}
 function editC(id){const c=D.challenges.find(x=>x.id===id);if(!c)return;S.ec=id;render();
-  setTimeout(()=>{$('#ct').value=c.title;$('#ck').value=c.task;const e=$('#cs');if(e.cm)e.cm.setValue(c.starter||'');else e.value=c.starter||'';$('#cn').value=c.cn||'';const e2=$('#cs2');if(e2.cm)e2.cm.setValue(c.cls||'');else e2.value=c.cls||'';window.scrollTo(0,0)},50)}
+  setTimeout(()=>{$('#ct').value=c.title;$('#ck').value=c.task;const e=$('#cs');if(e.cm)e.cm.setValue(c.starter||'');else e.value=c.starter||'';$('#cac').checked=!!c.ac;if(c.cls){const d=$('#cn').closest('details');if(d)d.open=true}$('#cn').value=c.cn||'';const e2=$('#cs2');if(e2.cm)e2.cm.setValue(c.cls||'');else e2.value=c.cls||'';window.scrollTo(0,0)},50)}
   async function delC(id){const c=D.challenges.find(x=>x.id===id);
     if(!await ask('متأكد إنك عايز تحذف تمرين "'+(c?c.title:'')+'"؟ حلول الطلاب عليه مش هتظهر في المراجعة.'))return;
   if(S.ec===id)S.ec=null;D.challenges=D.challenges.filter(c=>c.id!==id);DB.save();render()}
@@ -1407,47 +1436,54 @@ const snK=()=>'snd_'+(S.user||''),snD=()=>lsGet(snK(),{t:'',c:''});
 function snSave(){const t=$('#sn-t'),c=$('#sn-c');if(!t||!c)return;lsSet(snK(),{t:t.value,c:c.cm?c.cm.getValue():c.value,x:($('#sn-x')||{}).value||''})}
 const snEx=x=>x.ex?`<div style="margin-top:10px;line-height:1.9;white-space:pre-wrap">📝 ${fmt(x.ex)}</div>`:'';
 function snClr(){lsSet(snK(),{t:'',c:''})}
+function foldCard(id,title,desc,badge,act,body,nest){S.fold=S.fold||{};
+  const d=String(desc||'').replace(/[*`#]/g,'').replace(/\s+/g,' ').trim();
+  return `<div class="${nest?'fold nest':'card fold'}${S.fold[id]?' open':''}" data-fid="${id}"><div class="fh" onclick="foldT(event,this)"><span class="fa"></span><div class="ft"><b>${title}</b> ${badge||''}${d?`<div class="mute fd">${esc(d.length>110?d.slice(0,110)+'…':d)}</div>`:''}</div>${act?`<span class="fx">${act}</span>`:''}</div><div class="fb">${body}</div></div>`}
+function foldT(e,h){if(e.target.closest('button,a,input,select,textarea'))return;const f=h.parentNode,on=!f.classList.contains('open');S.fold=S.fold||{};f.classList.toggle('open',on);if(on)S.fold[f.dataset.fid]=1;else delete S.fold[f.dataset.fid];if(on)setTimeout(()=>f.querySelectorAll('.CodeMirror').forEach(c=>c.CodeMirror&&c.CodeMirror.refresh()),0)}
 function snWire(){const c=$('#sn-c');if(c&&c.cm&&!c.cm.snw){c.cm.snw=1;c.cm.on('change',snSave)}}
 function snRun(){const c=gv('#sn-c');if(!c.trim())return toast('اكتب الكود الأول.',1);conStart(S.user+'|sn',c)}
 const snRunUI=()=>`<div class="row"><button class="ghost" onclick="snRun()">▶ تشغيل وتجربة</button><span class="mute">الكود بيتحفظ لوحده كمسودة لحد ما تضيفه</span></div><div id="sn-out" data-ok="${S.user}|sn">${OUT[S.user+'|sn']||''}</div><label>شرح الكود (اختياري)</label><textarea id="sn-x" rows="3" dir="auto" oninput="snSave()">${esc(snD().x||'')}</textarea>`;
 function tS(){if(!S.tsid)return emptyCard('➕','ابدأ بإضافة شرح جديد');
   const ss=D.snips.filter(x=>x.sid===S.tsid);
   return `<div class="card"><h3>كود جديد للطلاب</h3><label>عنوان (اختياري)</label><input id="sn-t" placeholder="مثال: مثال على حلقة for" value="${esc(snD().t)}" oninput="snSave()"><label>الكود</label><textarea id="sn-c" class="code" spellcheck="false" data-ed>${esc(snD().c)}</textarea>${snRunUI()}
-  <p class="mute">الطالب هيشوف الكود ده في تاب "كودات" وعنده زرار نسخ.</p><button onclick="addSnip()">إضافة</button><span class="mute" id="sn-e" style="color:var(--bad)"></span></div>
-  <div class="card"><h3>الكودات (${ss.length})</h3>${ss.map(x=>`<div class="weak"><div class="row"><b style="flex:1">${ltr(x.title||'بدون عنوان')}</b><button class="ghost sm" onclick="copySnip('${x.id}',this)">نسخ</button><button class="del sm" onclick="delSnip('${x.id}')">حذف</button></div><pre class="snip" dir="ltr">${esc(x.code)}</pre>${snEx(x)}</div>`).join('')||'<span class="mute">لسه مفيش كودات.</span>'}</div>`}
+  <p class="mute">الطالب هيشوف الكود ده في تاب "كودات" وعنده زرار نسخ.</p><button onclick="addSnip()">${S.editK?'💾 حفظ التعديل':'إضافة'}</button>${S.editK?'<button class="ghost" onclick="cancelSnipEdit()">إلغاء</button><span class="mute"> ✏️ بتعدّل كود موجود</span>':''}<span class="mute" id="sn-e" style="color:var(--bad)"></span></div>
+  <div class="card"><h3>الكودات (${ss.length})</h3>${ss.map(x=>foldCard('s:'+x.id,ltr(x.title||'بدون عنوان'),x.ex,'',`<button class="ghost sm" onclick="copySnip('${x.id}',this)">نسخ</button><button class="ghost sm" onclick="editSnip('${x.id}')">تعديل</button><button class="del sm" onclick="delSnip('${x.id}')">حذف</button>`,`<pre class="snip" dir="ltr">${esc(x.code)}</pre>${snEx(x)}`,1)).join('')||'<span class="mute">لسه مفيش كودات.</span>'}</div>`}
 function snipView(){if(!D.sessions.length)return sessPicker();
   const ss=D.snips.filter(x=>x.sid===S.sid);
-  return sessPicker()+(ss.length?ss.map(x=>`<div class="card"><div class="row"><b style="flex:1">${ltr(x.title||'كود')}</b><button class="ghost sm" onclick="copySnip('${x.id}',this)">نسخ</button></div><pre class="snip" dir="ltr">${esc(x.code)}</pre>${snEx(x)}</div>`).join(''):emptyCard('🧩','مفيش كودات للشرح ده لسه','المدرس لسه مضافش كودات'))}
+  return sessPicker()+(ss.length?ss.map(x=>foldCard('s:'+x.id,ltr(x.title||'كود'),x.ex,'',`<button class="ghost sm" onclick="copySnip('${x.id}',this)">نسخ</button>`,`<pre class="snip" dir="ltr">${esc(x.code)}</pre>${snEx(x)}`)).join(''):emptyCard('🧩','مفيش كودات للشرح ده لسه','المدرس لسه مضافش كودات'))}
   function addSnip(){const t=$('#sn-t').value.trim(),c=gv('#sn-c'),x=($('#sn-x')||{value:''}).value.trim();
   if(!c.trim()){$('#sn-e').textContent=' اكتب الكود الأول.';return}
-  D.snips.push({id:uid('k'),sid:S.tsid,title:t,code:c,ex:x});snClr();DB.save();render()}
-  function delSnip(id){D.snips=D.snips.filter(x=>x.id!==id);DB.save();render()}
+  const ed=S.editK&&D.snips.find(s=>s.id===S.editK);if(ed){ed.title=t;ed.code=c;ed.ex=x}else D.snips.push({id:uid('k'),sid:S.tsid,title:t,code:c,ex:x});S.editK=null;snClr();DB.save();render()}
+  function delSnip(id){if(S.editK===id){S.editK=null;snClr()}D.snips=D.snips.filter(x=>x.id!==id);DB.save();render()}
+function editSnip(id){const x=D.snips.find(s=>s.id===id);if(!x)return;S.editK=id;lsSet(snK(),{t:x.title||'',c:x.code||'',x:x.ex||''});render();window.scrollTo({top:0,behavior:'smooth'})}
+function cancelSnipEdit(){S.editK=null;snClr();render()}
 function kWrite(fn){D.snips=fn(D.snips);DB.saving=true;setTimeout(()=>{DB.saving=false},100);
   firebase.database().ref('quiz/snips').transaction(cur=>fn(Array.isArray(cur)?cur:Object.values(cur||{})))}
 function aK(){if(!D.sessions.length)return sessPicker();const ss=D.snips.filter(x=>x.sid===S.sid);
-  return sessPicker()+`<div class="card"><h3>كود جديد للطلاب</h3><label>عنوان (اختياري)</label><input id="sn-t" value="${esc(snD().t)}" oninput="snSave()"><label>الكود</label><textarea id="sn-c" class="code" spellcheck="false" data-ed>${esc(snD().c)}</textarea>${snRunUI()}<button onclick="aAddK()">إضافة</button><span class="mute" id="sn-e" style="color:var(--bad)"></span></div>
-  <div class="card"><h3>الكودات (${ss.length})</h3>${ss.map(x=>`<div class="weak"><div class="row"><b style="flex:1">${ltr(x.title||'بدون عنوان')}</b><button class="ghost sm" onclick="copySnip('${x.id}',this)">نسخ</button><button class="del sm" onclick="aDelK('${x.id}')">حذف</button></div><pre class="snip" dir="ltr">${esc(x.code)}</pre>${snEx(x)}</div>`).join('')||'<span class="mute">لسه مفيش كودات.</span>'}</div>`}
+  return sessPicker()+`<div class="card"><h3>كود جديد للطلاب</h3><label>عنوان (اختياري)</label><input id="sn-t" value="${esc(snD().t)}" oninput="snSave()"><label>الكود</label><textarea id="sn-c" class="code" spellcheck="false" data-ed>${esc(snD().c)}</textarea>${snRunUI()}<button onclick="aAddK()">${S.editK?'💾 حفظ التعديل':'إضافة'}</button>${S.editK?'<button class="ghost" onclick="cancelSnipEdit()">إلغاء</button><span class="mute"> ✏️ بتعدّل كود موجود</span>':''}<span class="mute" id="sn-e" style="color:var(--bad)"></span></div>
+  <div class="card"><h3>الكودات (${ss.length})</h3>${ss.map(x=>foldCard('s:'+x.id,ltr(x.title||'بدون عنوان'),x.ex,'',`<button class="ghost sm" onclick="copySnip('${x.id}',this)">نسخ</button><button class="ghost sm" onclick="editSnip('${x.id}')">تعديل</button><button class="del sm" onclick="aDelK('${x.id}')">حذف</button>`,`<pre class="snip" dir="ltr">${esc(x.code)}</pre>${snEx(x)}`,1)).join('')||'<span class="mute">لسه مفيش كودات.</span>'}</div>`}
   function aAddK(){if(!hasP('s')||!S.sid)return;const t=$('#sn-t').value.trim(),c=gv('#sn-c'),x=($('#sn-x')||{value:''}).value.trim();
   if(!c.trim()){$('#sn-e').textContent=' اكتب الكود الأول.';return}
-  kWrite(l=>l.concat([{id:uid('k'),sid:S.sid,title:t,code:c,ex:x,by:S.user}]));snClr();render()}
-function aDelK(id){if(!hasP('s'))return;kWrite(l=>l.filter(x=>x.id!==id));render()}
+  const eid=S.editK;kWrite(l=>eid&&l.some(s=>s.id===eid)?l.map(s=>s.id===eid?{...s,title:t,code:c,ex:x}:s):l.concat([{id:uid('k'),sid:S.sid,title:t,code:c,ex:x,by:S.user}]));S.editK=null;snClr();render()}
+function aDelK(id){if(!hasP('s'))return;if(S.editK===id){S.editK=null;snClr()}kWrite(l=>l.filter(x=>x.id!==id));render()}
 function cWrite(fn){D.challenges=fn(D.challenges);DB.saving=true;setTimeout(()=>{DB.saving=false},100);
   firebase.database().ref('quiz/challenges').transaction(cur=>fn(Array.isArray(cur)?cur:Object.values(cur||{})))}
 const xMine=c=>isSup()||c.by===S.user;
 function aX(){if(!D.sessions.length)return sessPicker();const cs=D.challenges.filter(c=>c.sid===S.sid&&xMine(c));
   return sessPicker()+`<div class="card"><h3>${S.ex?'تعديل تمرين كود':'تمرين كود جديد'}</h3><label>العنوان</label><input id="xt"><label>المطلوب من الطالب</label><textarea id="xk" rows="3"></textarea>
   <label>كود البداية (Main)</label><textarea id="xs" class="code" spellcheck="false" data-ed>${esc(PG_START)}</textarea>
-  <label>كلاس إضافي (اختياري): لو كتبت كود هنا الطالب هيشوف ملفين، الكلاس و Main</label><input id="xn" dir="ltr" placeholder="اسم الكلاس مثال: Student"><textarea id="xs2" class="code" spellcheck="false" data-ed></textarea>
+  <label style="display:flex;align-items:center;gap:8px;margin:12px 0"><input type="checkbox" id="xac" style="width:auto;margin:0"> ➕ إضافة كلاس: الطالب يقدر يضيف كلاسات بنفسه (بلا حد)</label>
+  <details ontoggle="if(this.open)this.querySelectorAll('.CodeMirror').forEach(c=>c.CodeMirror.refresh())"><summary class="mute" style="cursor:pointer">كلاس جاهز من عندي (اختياري - الطريقة القديمة)</summary><label>اسم الكلاس</label><input id="xn" dir="ltr" placeholder="اسم الكلاس مثال: Student"><textarea id="xs2" class="code" spellcheck="false" data-ed></textarea></details>
   <button onclick="aAddX()">${S.ex?'حفظ التعديل':'إضافة التمرين'}</button>${S.ex?' <button class="ghost sm" onclick="S.ex=null;render()">إلغاء</button>':''}<span class="mute" id="xerr" style="color:var(--bad)"></span></div>
   <div class="card"><h3>التمارين (${cs.length})</h3>${cs.map(c=>`<div class="check row"><b style="flex:1">${esc(c.title)}${c.by&&c.by!==S.user?' <span class="mute">('+esc(c.by)+')</span>':''}</b><button class="ghost sm" onclick="aEditX('${c.id}')">✏️ تعديل</button> <button class="del sm" onclick="aDelX('${c.id}')">حذف</button></div>`).join('')||'<span class="mute">لسه مفيش تمارين.</span>'}</div>`}
 function aAddX(){if(!hasP('c')||!S.sid)return;const t=$('#xt').value.trim(),k=$('#xk').value.trim(),st=gv('#xs'),cl=gv('#xs2').trim()?gv('#xs2'):'',cn=$('#xn').value.trim()||'Student',er=m=>{$('#xerr').textContent=' '+m};
   if(!t||!k)return er('اكتب العنوان والمطلوب.');
   const ex=S.ex&&D.challenges.find(c=>c.id===S.ex&&xMine(c));
-  if(ex){const id=ex.id;cWrite(l=>l.map(c=>c.id===id?Object.assign({},c,{title:t,task:k,starter:st,cls:cl,cn}):c))}
-  else{const nc={id:uid('c'),sid:S.sid,title:t,task:k,starter:st,cls:cl,cn,by:S.user};cWrite(l=>l.concat([nc]))}
+  if(ex){const id=ex.id;cWrite(l=>l.map(c=>c.id===id?Object.assign({},c,{title:t,task:k,starter:st,cls:cl,cn,ac:$('#xac').checked?1:0}):c))}
+  else{const nc={id:uid('c'),sid:S.sid,title:t,task:k,starter:st,cls:cl,cn,ac:$('#xac').checked?1:0,by:S.user};cWrite(l=>l.concat([nc]))}
   S.ex=null;render()}
 function aEditX(id){const c=D.challenges.find(x=>x.id===id);if(!c||!xMine(c))return;S.ex=id;render();
-  setTimeout(()=>{const sv=(q,v)=>{const e=$(q);if(e.cm)e.cm.setValue(v||'');else e.value=v||''};sv('#xt',c.title);sv('#xk',c.task);sv('#xs',c.starter);sv('#xn',c.cn);sv('#xs2',c.cls);window.scrollTo(0,0)},50)}
+  setTimeout(()=>{const sv=(q,v)=>{const e=$(q);if(e.cm)e.cm.setValue(v||'');else e.value=v||''};sv('#xt',c.title);sv('#xk',c.task);sv('#xs',c.starter);$('#xac').checked=!!c.ac;if(c.cls){const d=$('#xn').closest('details');if(d)d.open=true}sv('#xn',c.cn);sv('#xs2',c.cls);window.scrollTo(0,0)},50)}
 async function aDelX(id){const c=D.challenges.find(x=>x.id===id);if(!c||!hasP('c')||!xMine(c))return;
   if(!await ask('تحذف تمرين "'+c.title+'"؟ حلول الطلاب عليه مش هتظهر في المراجعة.'))return;
   if(S.ex===id)S.ex=null;cWrite(l=>l.filter(x=>x.id!==id));render()}
