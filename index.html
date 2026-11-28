@@ -475,7 +475,74 @@ tr.mg td{animation:mgrow 6s linear infinite}
       }
       </style>
     </head>
-  </head>
+  <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Testme">
+<meta name="format-detection" content="telephone=no">
+<style>
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body{overscroll-behavior-y:contain}
+button,.tab,.opt{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+@supports(height:100dvh){.lg{min-height:calc(100dvh - 100px)}}
+@media(pointer:coarse){button{min-height:42px}button.sm{min-height:36px}}
+@media(max-width:700px){
+input,select,textarea,.CodeMirror textarea{font-size:16px}
+.wrap{padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.card{padding:14px;border-radius:16px}
+th,td{padding:7px 6px;font-size:13.5px}
+table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+body .tabs:not(.tabs2){position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0;border-radius:20px 20px 0 0;border-width:1px 0 0;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 24px rgba(0,0,0,.18);background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+body.kb .tabs:not(.tabs2){display:none}
+body.kb .wrap{padding-bottom:20px}
+[role=dialog]{align-items:flex-end!important;padding:0!important}
+[role=dialog]>.card{max-width:none!important;width:100%!important;max-height:88dvh;overflow:auto;border-radius:22px 22px 0 0;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+}
+</style>
+<script>
+(function(){try{var c=document.createElement('canvas');c.width=c.height=512;var x=c.getContext('2d');x.fillStyle='#f59a23';x.beginPath();if(x.roundRect)x.roundRect(0,0,512,512,112);else x.rect(0,0,512,512);x.fill();x.fillStyle='#fff';x.font='bold 208px monospace';x.textAlign='center';x.textBaseline='middle';x.fillText('<\/>',256,270);var u=c.toDataURL('image/png');
+var a=document.createElement('link');a.rel='apple-touch-icon';a.href=u;document.head.appendChild(a);
+var m={name:'Testme',short_name:'Testme',start_url:location.href.split('#')[0],display:'standalone',orientation:'portrait',dir:'rtl',lang:'ar',background_color:'#0f1722',theme_color:'#0f1722',icons:[{src:u,sizes:'512x512',type:'image/png',purpose:'any'}]};
+var k=document.createElement('link');k.rel='manifest';k.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));document.head.appendChild(k)}catch(e){}})();
+(function(){var t=function(e){var g=e.target;return g&&/^(INPUT|TEXTAREA|SELECT)$/.test(g.tagName)&&!/^(checkbox|radio|button|submit|range|file)$/.test(g.type||'')};addEventListener('focusin',function(e){if(t(e))document.body.classList.add('kb')});addEventListener('focusout',function(e){if(t(e))document.body.classList.remove('kb')})})();
+</script>
+<style id="lv2">
+  .nm.g8 b,.nm.g9 b{background:linear-gradient(90deg,var(--cc),var(--cc2),color-mix(in srgb,var(--c2,var(--c)) 45%,#fff),var(--cc2),var(--cc));background-size:260% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .nm.g8,.nm.g9{padding:0 14px;border-radius:999px;border:1.5px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,conic-gradient(var(--c),var(--c2,var(--c)),#fff,var(--c2,var(--c)),var(--c)) border-box;box-shadow:0 0 26px -2px color-mix(in srgb,var(--c) 70%,transparent),inset 0 0 14px -6px var(--c)}
+  .nm.g8::before,.nm.g8::after,.nm.g9::before,.nm.g9::after{position:absolute;pointer-events:none;color:var(--c);text-shadow:0 0 8px var(--c);font-size:12px}
+  .nm.g8::before{content:'✦';top:-8px;inset-inline-end:-5px}
+  .nm.g8::after{content:'✧';bottom:-7px;inset-inline-start:-4px}
+  .nm.g9::before{content:'🌌';font-size:14px;top:-15px;inset-inline-start:50%;margin-inline-start:-9px;text-shadow:none}
+  .nm.g9::after{content:'✦';bottom:-8px;inset-inline-end:-4px}
+  .ttl.g8,.ttl.g9{background:linear-gradient(90deg,color-mix(in srgb,var(--c) 24%,transparent),color-mix(in srgb,var(--c2,var(--c)) 24%,transparent));box-shadow:0 0 22px -3px var(--c);font-weight:800;border-color:var(--c)}
+  .av.g8,.av.g9{background:linear-gradient(135deg,var(--c),var(--c2,var(--c)));box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 45%,transparent),0 0 26px var(--c)}
+  .lvbox{position:relative;z-index:1}
+  .lvbox.g8,.lvbox.g9{box-shadow:0 0 100px -4px var(--c),0 0 0 1px color-mix(in srgb,var(--c) 40%,transparent)}
+  .lvbox.g9 .lvem{filter:drop-shadow(0 0 18px var(--c))}
+  #lvUp:has(.lvbox.g8),#lvUp:has(.lvbox.g9),#chOv.dchrv{overflow:hidden}
+  #lvUp:has(.lvbox.g8)::before,#lvUp:has(.lvbox.g9)::before,#chOv.dchrv::before{content:'';position:absolute;width:220vmax;height:220vmax;left:50%;top:50%;margin:-110vmax 0 0 -110vmax;background:repeating-conic-gradient(rgba(255,214,102,.13) 0 8deg,transparent 8deg 18deg);pointer-events:none;-webkit-mask:radial-gradient(circle,#000 0,transparent 55%);mask:radial-gradient(circle,#000 0,transparent 55%)}
+  .av.fr-9,.av2.fr-9{border:3px solid #10b981;box-shadow:0 0 16px #10b981,inset 0 0 10px rgba(16,185,129,.5)}
+  .av.fr-10,.av2.fr-10{border:3px solid transparent;color:var(--ink);background:linear-gradient(var(--card),var(--card)) padding-box,conic-gradient(#34d399,#22d3ee,#818cf8,#e879f9,#34d399) border-box;box-shadow:0 0 18px #22d3ee}
+  .av.fr-11,.av2.fr-11{border:3px solid #fde047;box-shadow:0 0 14px #fde047,0 0 28px #facc15}
+  .av.fr-12,.av2.fr-12{border:3px solid transparent;color:var(--ink);background:linear-gradient(var(--card),var(--card)) padding-box,conic-gradient(#0f172a,#6366f1,#f0abfc,#fff,#0f172a) border-box;box-shadow:0 0 18px #818cf8}
+  .av.fr-13,.av2.fr-13{border:3px solid transparent;color:var(--ink);background:linear-gradient(var(--card),var(--card)) padding-box,conic-gradient(#fff7c2,#ffc83d,#b45309,#ffc83d,#fff7c2) border-box;box-shadow:0 0 22px #ffc83d,0 0 40px rgba(255,200,61,.5)}
+  .chest.dch .cx{filter:hue-rotate(35deg)}
+  .bx{position:fixed;left:50%;top:50%;z-index:9700;font-size:26px;font-style:normal;pointer-events:none;display:none}
+  @media(prefers-reduced-motion:no-preference){
+  @keyframes frpulse{50%{box-shadow:0 0 28px #fde047,0 0 48px #facc15}}
+  @keyframes lvspin{to{transform:rotate(360deg)}}
+  @keyframes bxfly{from{transform:translate(-50%,-50%) scale(.3);opacity:1}to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.25) rotate(var(--r));opacity:0}}
+  header .av.fr-10,header .av.fr-12{animation:frhue 7s linear infinite}
+  header .av.fr-11{animation:frpulse 1.6s ease-in-out infinite}
+  header .av.fr-13{animation:frpulse 2s ease-in-out infinite,frhue 12s linear infinite}
+  header .nm.g8 b,header .nm.g9 b{animation:lvshine 3s linear infinite}
+  header .nm.g8::before,header .nm.g9::before,header .nm.g9::after{animation:lvtw 1.8s ease-in-out infinite}
+  header .nm.g9{animation:lvaura 2s ease-in-out infinite,lvhue 8s linear infinite}
+  #lvUp:has(.lvbox.g8)::before,#lvUp:has(.lvbox.g9)::before,#chOv.dchrv::before{animation:lvspin 22s linear infinite}
+  .bx{display:block;animation:bxfly 1.4s ease-out forwards}
+  }
+  </style>
+</head>
 <body>
 <div id="guard">أغلق أدوات المطوّر (Developer Tools) عشان تكمل.</div>
 <div class="wrap" id="app"><div class="ld" role="status"><div class="spn"></div><b>بيحمّل…</b><small>النت بطيء شوية، استنى لحظات</small><div class="sk"><i></i><i></i><i></i></div></div></div>
@@ -536,8 +603,8 @@ let PEND=false,QUIET=false;
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const hashStr=x=>{let h=0;for(const c of String(x))h=(h*31+c.charCodeAt(0))>>>0;return h};
 const pickBy=(a,k)=>a[hashStr(k)%a.length];
-const TIERS=[['كتكوت Java','🐣','#9aa7bb','#cbd5e1'],['بيفهم في الأقواس','🌱','#4da3ff','#7dd3fc'],['صديق الـ Compiler','⚡','#2fc08a','#86efac'],['قاهر الـ Bugs','🔥','#b58cff','#f0abfc'],['ساحر الحلقات','✨','#ff8fb1','#fda4af'],['مهندس الكود','🚀','#f59a23','#fde047'],['صائد الأخطاء','🎯','#38bdf8','#34d399'],['سيّد الـ Loops','🌀','#22d3ee','#818cf8'],['دماغ ألماظ','💎','#67e8f9','#a78bfa'],['مبرمج محترف','🛠️','#fbbf24','#f97316'],['خبير الـ OOP','🧠','#a3e635','#22d3ee'],['أسطورة الفصل','👑','#ffc83d','#ff8a3d'],['قناص الـ Edge Cases','🏹','#fb7185','#f59e0b'],['مدمّر الـ Bugs','💥','#ff6b4a','#fbbf24'],['ملك الجافا','🏆','#ffd479','#ff6b4a'],['معلّم المعلّمين','🎓','#c084fc','#60a5fa'],['كبير المهندسين','🏛️','#2dd4bf','#a78bfa'],['العبقري','🌟','#fde68a','#f472b6'],['إمبراطور الكود','🔱','#f0abfc','#67e8f9'],['أسطورة لا تُقهر','☄️','#ffe066','#ff4d8d']];
-const tier=lv=>{const i=Math.min(Math.max(lv,1),TIERS.length),t=TIERS[i-1];return{i,t:t[0],e:t[1],c:t[2],c2:t[3],g:i<3?1:i<5?2:i<7?3:i<10?4:i<14?5:i<18?6:7,o:'✦'.repeat(Math.min(Math.floor(i/3),6))}};
+const TIERS=[['أول سطر','🌱','#9aa7bb','#cbd5e1'],['بيقفل الأقواس','🔧','#4da3ff','#7dd3fc'],['عدّى الـ Compiler','✅','#2fc08a','#86efac'],['بيقرا الـ Error','🔍','#b58cff','#f0abfc'],['ماسك الـ Loops','🔁','#ff8fb1','#fda4af'],['كوده بيشتغل','⚙️','#f59a23','#fde047'],['صايد الأخطاء','🎯','#38bdf8','#34d399'],['كود نضيف','🧹','#22d3ee','#818cf8'],['بيفكّر قبل ما يكتب','💡','#67e8f9','#a78bfa'],['مبرمج بجد','🛠️','#fbbf24','#f97316'],['فاهم الـ OOP','🧩','#a3e635','#22d3ee'],['اللي بيسألوه','🙋','#ffc83d','#ff8a3d'],['عينه على الـ Edge Cases','🔬','#fb7185','#f59e0b'],['صاحب الـ Debugger','🐞','#ff6b4a','#fbbf24'],['بيحلّها من أول مرة','⚡','#ffd479','#ff6b4a'],['بيشرح لزمايله','🗣️','#c084fc','#60a5fa'],['مرجع الفصل','📚','#2dd4bf','#a78bfa'],['عقلية مهندس','📐','#fde68a','#f472b6'],['أسطى الكود','🔨','#f0abfc','#67e8f9'],['معلّم الكود','🎖️','#ffe066','#ff4d8d'],['ابن كود','🧰','#5eead4','#38bdf8'],['خبرة سنين','🕰️','#86efac','#22d3ee'],['بيشمّ البج من بعيد','🔭','#fda4af','#c084fc'],['بيبني من الصفر','🏗️','#fcd34d','#fb7185'],['كوده مضمون','🛡️','#c4b5fd','#f0abfc'],['دماغ الفريق','🧠','#fdba74','#f43f5e'],['مبيتلخبطش','🧊','#7dd3fc','#a5f3fc'],['كبير الدفعة','👑','#ffc83d','#ff8a3d'],['مدرسة لوحده','🏫','#f87171','#fbbf24'],['على القمة','🏔️','#a78bfa','#22d3ee']];
+const tier=lv=>{const i=Math.min(Math.max(lv,1),TIERS.length),t=TIERS[i-1];return{i,t:t[0],e:t[1],c:t[2],c2:t[3],g:i<3?1:i<5?2:i<7?3:i<10?4:i<14?5:i<18?6:i<24?7:i<28?8:9,o:'✦'.repeat(Math.min(Math.floor(i/3),6))}};
 const nameTag=(n,p)=>{const T=tier(level(p)),f=PF(D.users[n]),S2=f.ti&&f.ti<=T.i?tier(f.ti):T,av=AVS[f.av];return `${av?`<span class="av2 fr-${+f.fr||0}">${av[0]}</span>`:''}<span class="nm t${T.i} g${T.g}" style="--c:${T.c};--c2:${T.c2}"><i>${S2.e}</i> <b>${esc(n)}</b></span> <span class="ttl g${T.g}" style="--c:${T.c};--c2:${T.c2}" data-o="${T.o}">${S2.t}</span>`};
 const TIPS={
  all:['خد وقتك وحل، مفيش حد بيجري وراك.','ده مش آخر سؤال في حياتك، اهدى وركّز.','شايف يا اللي بتغش من اللي جنبك؟ المدرس شايفك 👀','اللي جنبك مش هيدخل الامتحان بدالك 😄','الغلطة مش عيب، العيب إنك متفهمش ليه غلطت.','خد نفس عميق وارجع اقرا السؤال تاني.','كل مبرمج كبير كان يوم بيكتب Hello World.','نقطة النهارده بتبني لقب بكره 👑','الفهم أحسن من الحفظ، والحفظ أحسن من النسخ 😉','لو مش متأكد، اسأل المدرس. السؤال مش عيب.','حتى المحترفين بيدوروا في جوجل، بس بعد ما يحاولوا الأول 😅','اشرب مايه وكمّل، مخك محتاجها.'],
@@ -869,7 +936,13 @@ function bin(o,a,b){
    case'%':if(!d&&y===0)throw new JErr('قسمة على صفر (ArithmeticException)');r=x%y;break;
    case'<':return x<y;case'>':return x>y;case'<=':return x<=y;case'>=':return x>=y}
   return d?new Dbl(r):r}
-const TY=['int','long','double','float','boolean','char','String','short','byte'];
+function jLev(a,b){const m=a.length,n=b.length;if(Math.abs(m-n)>2)return 9;let p=[];for(let j=0;j<=n;j++)p[j]=j;for(let i=1;i<=m;i++){const c=[i];for(let j=1;j<=n;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c}return p[n]}
+function jNear(n,list){if(list.includes(n))return null;const lo=n.toLowerCase();let best=null,bd=9;for(const w of list){const x=w.toLowerCase();if(x===lo)return w;const d=jLev(lo,x);if(d<bd){bd=d;best=w}}return bd<=(n.length>5?2:1)?best:null}
+const JSTR=['length','charAt','substring','equals','equalsIgnoreCase','toUpperCase','toLowerCase','indexOf','lastIndexOf','contains','isEmpty','isBlank','trim','strip','startsWith','endsWith','replace','replaceAll','replaceFirst','compareTo','compareToIgnoreCase','concat','split','toCharArray','matches','format','valueOf','chars','repeat','join','hashCode','toString','getClass','intern','codePointAt','contentEquals','regionMatches','subSequence','getBytes','lines','formatted','stripLeading','stripTrailing'];
+const JAL=['add','addAll','get','set','size','isEmpty','clear','contains','indexOf','lastIndexOf','remove','removeAll','removeIf','retainAll','containsAll','sort','forEach','iterator','listIterator','subList','toArray','stream','equals','hashCode','toString','ensureCapacity','trimToSize','clone','getFirst','getLast','removeFirst','removeLast','addFirst','addLast','reversed','replaceAll','getClass'];
+const JSB=['append','insert','delete','deleteCharAt','reverse','toString','length','charAt','setLength','setCharAt','indexOf','lastIndexOf','replace','substring','capacity','isEmpty','compareTo','equals','hashCode','subSequence','chars','ensureCapacity','trimToSize','getClass'];
+const JRN=['nextInt','nextDouble','nextBoolean','nextLong','nextFloat','nextGaussian','ints','doubles','setSeed','nextBytes'];
+const JSC=['nextInt','nextLine','nextDouble','next','nextBoolean','nextLong','nextFloat','nextShort','nextByte','hasNext','hasNextInt','hasNextLine','hasNextDouble','hasNextLong','hasNextBoolean','close','useDelimiter','skip','findInLine'];
 document.head.appendChild(Object.assign(document.createElement('style'),{textContent:'.jsq{text-decoration:underline wavy #e5384a;text-decoration-skip-ink:none;text-underline-offset:3px}.CodeMirror-linebackground.errline{background:rgba(229,56,74,.22);box-shadow:inset 4px 0 0 #e5384a}'}));
 function jPopClose(){const p=document.getElementById('jfx');if(p)p.remove()}
 function jFix(cm,imp){jPopClose();const n=cm.lineCount(),T=[];for(let i=0;i<n;i++)T.push(cm.getLine(i));
@@ -954,7 +1027,7 @@ function runJava0(src,inp,opt){opt=opt||{};const L=!!opt.live,IMP=new Set(),PK={
       if(n==='nextBoolean'){if(!/^(true|false)$/i.test(m[1]))throw new JErr('InputMismatchException: "'+m[1]+'" مش true/false');return m[1].toLowerCase()==='true'}
       if(isNaN(+m[1])||(n!=='nextDouble'&&!/^[-+]?\d+$/.test(m[1])))throw new JErr('InputMismatchException: "'+m[1]+'" مش '+(n==='nextDouble'?'رقم':'رقم صحيح'));
       return n==='nextDouble'?new Dbl(+m[1]):Math.trunc(+m[1])}
-    throw new Unsup('Scanner.'+n)}
+      {const k=jNear(n,JSC);if(k)throw new JErr('cannot find symbol: الدالة '+n+'() مش موجودة في Scanner. قصدك '+k+'() ؟ (الجافا حساسة لحالة الحروف: nextInt مش nextint)');throw new Unsup('Scanner.'+n)}}
   function jop(n,a){a=a.slice();const hp=a.length>1&&a[0]===null;if(hp)a.shift();
     const msg=str(a[0]);let dk,title,opts,codes,initial='',icon=1;
     if(n==='showInputDialog'){dk='input';title=hp&&typeof a[1]==='string'?a[1]:'Input';if(!hp&&a.length===2)initial=str(a[1]);icon=hp&&a.length>2?num(a[2]):3}
@@ -985,7 +1058,7 @@ function runJava0(src,inp,opt){opt=opt||{};const L=!!opt.live,IMP=new Set(),PK={
     else if(o&&o.rn){switch(n){case'nextInt':return a.length>1?num(a[0])+o.rn.nextInt(num(a[1])-num(a[0])):o.rn.nextInt(a.length?num(a[0]):undefined);case'nextDouble':return new Dbl(o.rn.nextDouble());case'nextBoolean':return o.rn.nextBoolean()}}
     else if(o&&o.sc)return sc(n);
     else if(o===null)throw new JErr('NullPointerException: استدعاء دالة على null');
-    throw new Unsup('.'+n+'()')}
+    {const ls=typeof o==='string'?JSTR:Array.isArray(o)&&o.al?JAL:o&&o.sb?JSB:o&&o.rn?JRN:null,k=ls&&jNear(n,ls);if(k)throw new JErr('cannot find symbol: الدالة '+n+'() مش موجودة. قصدك '+k+'() ؟ (الجافا حساسة لحالة الحروف)');throw new Unsup('.'+n+'()')}}
   function st(k,a){const dd=a.some(x=>x instanceof Dbl),n=a.map(num),s=str(a[0]);
     switch(k){case'Math.abs':return dd?new Dbl(Math.abs(n[0])):Math.abs(n[0]);case'Math.max':{const r=Math.max(...n);return dd?new Dbl(r):r}case'Math.min':{const r=Math.min(...n);return dd?new Dbl(r):r}
      case'Math.pow':return new Dbl(Math.pow(n[0],n[1]));case'Math.sqrt':return new Dbl(Math.sqrt(n[0]));case'Math.floor':return new Dbl(Math.floor(n[0]));case'Math.ceil':return new Dbl(Math.ceil(n[0]));
@@ -1092,7 +1165,7 @@ function runJava0(src,inp,opt){opt=opt||{};const L=!!opt.live,IMP=new Set(),PK={
         else if(CL[n]){ex('(');const a=args();f=e=>nw(n,a.map(x=>x(e)))}
         else if(/(Exception|Error)$/.test(n)){ex('(');const a=args();f=e=>{const v=a.map(x=>x(e));return mkEx(n,v.length?str(v[0]):null)}}
         else throw new Unsup('new '+n)}
-      else if(w==='System'){ex('.');const o=id();if(o==='exit'&&is('(')){p++;const a0=args();f=e=>{a0.forEach(x=>x(e));throw new Exit()}}else{if(is('('))throw new Unsup('System.'+o);ex('.');const m=id();if(o==='in')throw new Unsup('System.in');ex('(');const a=args();
+        else if(w==='System'){ex('.');const o=id();{const k=jNear(o,['out','err','in','exit']);if(k)throw perr('cannot find symbol: System.'+o+' مش موجودة. قصدك System.'+k+' ؟ (الجافا حساسة لحالة الحروف)',p-1,p-1)}if(o==='exit'&&is('(')){p++;const a0=args();f=e=>{a0.forEach(x=>x(e));throw new Exit()}}else{if(is('('))throw new Unsup('System.'+o);ex('.');const m=id();if(o==='in')throw new Unsup('System.in');if(o==='out'){const k=jNear(m,['println','print','printf','format','flush','write','append','checkError','close']);if(k)throw perr('cannot find symbol: الدالة '+m+'() مش موجودة. قصدك '+k+'() ؟ (الجافا حساسة لحالة الحروف)',p-1,p-1)}ex('(');const a=args();
         f=e=>{const v=a.map(x=>x(e));if(o==='out'){if(m==='println')out+=(v.length?str(v[0]):'')+'\n';else if(m==='print')out+=str(v[0]);else if(m==='printf'||m==='format')out+=jf(v[0],v.slice(1));else throw new Unsup('System.out.'+m)}
         if(out.length>1e5)throw new JErr('الطباعة كبيرة جدًا')}}}
           else if(w==='JOptionPane'&&is('.')){need('JOptionPane');p++;const n=id();
@@ -1102,7 +1175,7 @@ function runJava0(src,inp,opt){opt=opt||{};const L=!!opt.live,IMP=new Set(),PK={
         if(!is('(')){const K={'Math.PI':new Dbl(Math.PI),'Integer.MAX_VALUE':2147483647,'Integer.MIN_VALUE':-2147483648},k=w+'.'+n;if(!(k in K))throw new Unsup(k);f=()=>K[k]}
         else{p++;const a=args();f=e=>st(w+'.'+n,a.map(x=>x(e)))}}
       else if(is('(')){p++;const a=args();f=e=>callU(e,w,a.map(x=>x(e)))}
-      else{f=e=>lk(e,w).v;f.set=(e,v)=>{const s=lk(e,w);s.v=co(s.t,v)}}}
+      else{f=e=>{const s=lk(e,w);if(s.u)throw new JErr('variable '+w+' might not have been initialized — المتغير "'+w+'" اتعرّف من غير قيمة وبتستخدمه قبل ما تديله قيمة. اكتب '+w+' = ... الأول، أو ادّيله قيمة وقت التعريف.');return s.v};f.set=(e,v)=>{const s=lk(e,w);s.v=co(s.t,v);s.u=0}}}
     else throw new JErr('رمز غير متوقع: "'+t[1]+'"');
     for(;;){
       if(is('[')){p++;const a=f,i=ex0();ex(']');f=e=>{const A=a(e),k=num(i(e));if(!Array.isArray(A))throw new JErr('مش مصفوفة');oob(k,A);return A[k]};
@@ -1137,23 +1210,26 @@ function runJava0(src,inp,opt){opt=opt||{};const L=!!opt.live,IMP=new Set(),PK={
     if(q!==b)return;
     const e=new JErr('incompatible types: String cannot be converted to '+ty+' — JOptionPane.showInputDialog بترجّع String دايمًا، لازم تحوّلها '+(PRh[ty]?'بـ '+PRh[ty]+'(...)':'(مثلًا .charAt(0) على النص)'));
     e.from=TP[a];e.to=TE[b-1];e.line=src.slice(0,e.from).split('\n').length-1;throw e}
-  function decl(){const ty=T[p++][1];gen();let dims=0;while(is('[')){p++;ex(']');dims++}
+    function decl(F){const ty=T[p++][1];gen();let dims=0;while(is('[')){p++;ex(']');dims++}
     const ds=[];do{const n=id();let d2=dims;while(is('[')){p++;ex(']');d2++}let init=null;if(eat('=')){const q0=p;init=is('{')?alit(ty):ex0();if(!d2)jIn(ty,q0,p)}ds.push([n,init,d2])}while(eat(','));
-    return e=>{for(const[n,init,d2]of ds){const t=ty==='var'?'any':ty;let v=init?init(e):(d2||t==='String'||!TY.includes(t)&&t!=='any'?null:t==='boolean'?false:0);if(!d2)v=co(t,v);e.m.set(n,{t:d2?'arr':t,v})}}}
+    return e=>{for(const[n,init,d2]of ds){const t=ty==='var'?'any':ty;let v=init?init(e):(d2||t==='String'||!TY.includes(t)&&t!=='any'?null:t==='boolean'?false:0);if(!d2){if(init&&v instanceof Dbl&&['int','long','short','byte'].includes(t))throw new JErr('incompatible types: possible lossy conversion from double to '+t+' — القيمة فيها كسور ومينفعش تتخزن في '+t+'. خلّي نوع المتغير double، أو اكتب ('+t+') قبل القيمة.');v=co(t,v)}if(e.m.has(n))throw new JErr('المتغير "'+n+'" متعرّف قبل كده في نفس المكان (variable '+n+' is already defined). غيّر الاسم، أو لو قصدك تغيّر قيمته شيل كلمة '+ty+' واكتب '+n+' = ... بس.');e.m.set(n,{t:d2?'arr':t,v,u:init||F?0:1})}}}
   const loopSig=(r,fn)=>{if(r){if(r.k==='b')return 1;if(r.k==='r')return r}};
   function stmt(){
+    function perr(m,a,b){const e=new JErr(m);e.from=TP[a];e.to=TE[b===undefined?a:b];e.line=src.slice(0,e.from).split('\n').length-1;return e}
+  function cnd(q,k){let d=0;for(let i=q;i<p-1;i++){const t=T[i];if(!t||t[0]!=='o')continue;if(t[1]==='('||t[1]==='['||t[1]==='{')d++;else if(t[1]===')'||t[1]===']'||t[1]==='}')d--;else if(d===0&&t[1]==='=')throw perr('فيه "=" (إسناد) جوه شرط ال '+k+'. "=" معناها خزّن قيمة، مش قارن. لو قصدك مقارنة اكتب "==".',i,i)}}
+  function body(k){if(is(';'))throw perr(k==='else'?'فيه ";" بعد else. كده ال else بتنفّذ "ولا حاجة" والسطر اللي بعده بيشتغل دايمًا. شيل ال ";".':'فيه ";" زيادة بعد ال '+k+'. كده ال '+k+' بتشتغل على "ولا حاجة" والسطور اللي بعدها مش جوهها. شيل ال ";".',p,p);return stmt()}
     if(is('{'))return blk();if(eat(';'))return()=>{};
     const t=T[p];if(!t)throw new JErr('الكود ناقص');
     if(t[0]==='i'){const w=t[1];
-      if(w==='if'){p++;ex('(');const c=ex0();ex(')');if(is(';'))throw new JErr('فيه ";" زيادة بعد شرط ال if. كده الـ if بتنفّذ "ولا حاجة" والسطور اللي بعدها بتشتغل دايماً. شيل ال ";".');const a=stmt();let b=null;if(isw('else')){p++;b=stmt()}return e=>c(e)?a(e):(b&&b(e))}
-      if(w==='while'){p++;ex('(');const c=ex0();ex(')');const b=stmt();return e=>{while(c(e)){tick();const r=loopSig(b(e));if(r===1)break;if(r)return r}}}
-      if(w==='do'){p++;const b=stmt();if(!isw('while'))throw new JErr('متوقع while بعد do');p++;ex('(');const c=ex0();ex(')');ex(';');return e=>{do{tick();const r=loopSig(b(e));if(r===1)break;if(r)return r}while(c(e))}}
+      if(w==='else')throw perr('فيه else من غير if قبلها. غالبًا فيه ";" أو "}" زيادة قبل ال else.',p,p);if(w==='if'){p++;ex('(');const q0=p;const c=ex0();ex(')');cnd(q0,'if');if(is(';'))throw new JErr('فيه ";" زيادة بعد شرط ال if. كده الـ if بتنفّذ "ولا حاجة" والسطور اللي بعدها بتشتغل دايماً. شيل ال ";".');const a=stmt();let b=null;if(isw('else')){p++;b=body('else')}return e=>cb(c(e),'if')?a(e):(b&&b(e))}
+      if(w==='while'){p++;ex('(');const q0=p;const c=ex0();ex(')');cnd(q0,'while');const b=body('while');return e=>{while(cb(c(e),'while')){tick();const r=loopSig(b(e));if(r===1)break;if(r)return r}}}
+      if(w==='do'){p++;const b=stmt();if(!isw('while'))throw new JErr('متوقع while بعد do');p++;ex('(');const c=ex0();ex(')');ex(';');return e=>{do{tick();const r=loopSig(b(e));if(r===1)break;if(r)return r}while(cb(c(e),'do-while'))}}
       if(w==='for'){p++;ex('(');
-        if(isType()&&T[p+2]&&T[p+2][1]===':'){const ty=T[p++][1],n=id();p++;const a=ex0();ex(')');const b=stmt();
+        if(isType()&&T[p+2]&&T[p+2][1]===':'){const ty=T[p++][1],n=id();p++;const a=ex0();ex(')');const b=body('for');
           return e=>{for(const x of a(e).slice()){tick();const r=loopSig(b({m:new Map([[n,{t:ty==='var'?'any':ty,v:co(ty,x)}]]),p:e}));if(r===1)break;if(r)return r}}}
         const init=is(';')?null:(isType()&&isDecl()?decl():ex0());ex(';');const c=is(';')?()=>true:ex0();ex(';');
-        const us=[];if(!is(')')){us.push(ex0());while(eat(','))us.push(ex0())}ex(')');const b=stmt();
-        return e=>{const e2={m:new Map(),p:e};if(init)init(e2);while(c(e2)){tick();const r=loopSig(b(e2));if(r===1)break;if(r)return r;us.forEach(u=>u(e2))}}}
+        const us=[];if(!is(')')){us.push(ex0());while(eat(','))us.push(ex0())}ex(')');const b=body('for');
+        return e=>{const e2={m:new Map(),p:e};if(init)init(e2);while(cb(c(e2),'for')){tick();const r=loopSig(b(e2));if(r===1)break;if(r)return r;us.forEach(u=>u(e2))}}}
         if(w==='yield'){p++;const v=ex0();ex(';');return e=>({k:'y',v:v(e)})}
       if(w==='break'){p++;ex(';');return()=>({k:'b'})}
       if(w==='continue'){p++;ex(';');return()=>({k:'c'})}
@@ -1189,7 +1265,7 @@ function runJava0(src,inp,opt){opt=opt||{};const L=!!opt.live,IMP=new Set(),PK={
   if(isw(C.name)&&T[p+1]&&T[p+1][1]==='('){rt='ctor'}else if(isw('void')){p++;rt='void'}else if(isType()){rt=T[p++][1];gen();while(is('[')){p++;ex(']');rt='arr'}}else if(isw('import'))throw new JErr('الـ import مكانه فوق الكلاس مش جواه. انقل السطر ده لأول الكود قبل public class Main');else throw new Unsup('"'+(T[p]?T[p][1]:'')+'" داخل الكلاس');
     const nm=id();
     if(is('(')){p++;const ps=[];while(!is(')')){while(isw('final'))p++;const t=T[p++][1];if(PK[t])need(t);gen();let d=0;while(is('[')){p++;ex(']');d++}const pn=id();ps.push([d?'arr':t,pn]);if(!eat(','))break}ex(')');addM(C,MD,nm,ps,rt)}
-    else{p=s0;const d=decl();ex(';');if(MD.has('static')||C.itf)SI.push(()=>d({m:C.sm,p:G,cl:C}));else C.fi.push(d)}}
+    else{p=s0;const d=decl(1);ex(';');if(MD.has('static')||C.itf)SI.push(()=>d({m:C.sm,p:G,cl:C}));else C.fi.push(d)}}
   ex('}');
 }
   do{PC()}while(T[p]);
@@ -2049,8 +2125,8 @@ function podium(a){const t=a.slice(0,3).filter(r=>r.p>0);if(!t.length)return '';
   /* ================= مزايا الطلاب: تخصيص + صندوق + منافس + أصوات + جولة ================= */
   const PF=u=>{const f=(u&&u.pf)||{};if(!u||!u.answers||!u.done)return f;const lv=level(pts(u)),un=new Set(String(f.un||'').split(',').filter(Boolean)),g=Object.assign({},f);if(AVS[g.av]&&lv<AVS[g.av][1]&&!un.has('a'+g.av))g.av=-1;if(+g.fr&&FRS[+g.fr]&&lv<FRS[+g.fr][1]&&!un.has('f'+g.fr))g.fr=0;return g};
 const UNL=u=>new Set(String(PF(u).un||'').split(',').filter(Boolean));
-const AVS=[['🐣',1],['🐱',1],['🐶',1],['🦊',1],['🐼',1],['🐸',1],['🐯',3],['🦁',3],['🐵',3],['🐰',3],['🐨',3],['🐙',3],['🦄',6],['🐲',6],['🦅',6],['🦉',6],['🐺',6],['🦖',6],['🤖',9],['👾',9],['👽',9],['🥷',9],['🧙',9],['🧑‍🚀',9],['🦸',12],['🧛',12],['🧞',12],['🐉',12],['🔮',12],['🪐',12],['👑',15],['💎',15],['⚡',15],['🌈',15],['☄️',15],['🔱',18]];
-const FRS=[['بدون إطار',1],['نيون',2],['ذهبي',4],['ناري',6],['جليدي',8],['قوس قزح',10],['مجرة',13],['ألماس',16],['هولو',19]];
+const AVS=[['🐣',1],['🐱',1],['🐶',1],['🦊',1],['🐼',1],['🐸',1],['🐯',3],['🦁',3],['🐵',3],['🐰',3],['🐨',3],['🐙',3],['🦄',6],['🐲',6],['🦅',6],['🦉',6],['🐺',6],['🦖',6],['🤖',9],['👾',9],['👽',9],['🥷',9],['🧙',9],['🧑‍🚀',9],['🦸',12],['🧛',12],['🧞',12],['🐉',12],['🔮',12],['🪐',12],['👑',15],['💎',15],['⚡',15],['🌈',15],['☄️',15],['🔱',18],['🦈',21],['🐋',21],['🦚',22],['🦜',22],['🐘',23],['🦍',23],['🧚',24],['🧜',24],['🥇',25],['🏆',25],['🛸',26],['🚀',26],['🌋',27],['🌠',27],['🎭',28],['🎯',28],['🧬',29],['🔥',29],['💫',30],['🌌',30]];
+const FRS=[['بدون إطار',1],['نيون',2],['ذهبي',4],['ناري',6],['جليدي',8],['قوس قزح',10],['مجرة',13],['ألماس',16],['هولو',19],['زمرد',21],['شفق قطبي',23],['كهربا',25],['نجوم',27],['ملكي',30]];
 const CHEST_PTS=[5,5,5,5,5,5,5,10,10];
 function pfSave(o){const u=me();u.pf=u.pf||{};const p={};for(const k in o){u.pf[k]=o[k];p['pf/'+k]=o[k]}DB.save(p)}
 
@@ -2084,7 +2160,29 @@ function chestOpen(){const u=me();if(!u||u.teacher)return;const s=chestState();i
   if(r.t==='cos'){const nu=[...un,r.id].join(',');u.pf=u.pf||{};u.pf.un=nu;p['pf/un']=nu}
   DB.save(p);render();fxSound('chest');confetti();
   const o=document.createElement('div');o.id='chOv';o.innerHTML='<div class="lvbox" style="--c:#ffc83d;--c2:#ff8a3d"><div class="lvem">'+r.big+'</div><div class="lvk">DAILY CHEST</div><div class="lvt" style="margin-top:10px">'+r.txt+'</div><div class="mute">'+(r.t==='cos'?'اتفتحت في «🎨 تخصيص»':'اتضافت لنقطك')+'</div></div>';o.onclick=()=>o.remove();document.body.appendChild(o);setTimeout(()=>o.remove(),4200)}
-
+/* ---- صندوق كل 24 ساعة + تأثيرات ---- */
+const DCH_PTS=[5,5,5,5,10,10,10,15,15,20];
+const dchNow=()=>Math.round(exNow());
+function dchLeft(u){const l=+((u.pf||{}).dc)||0;return l?Math.min(Math.max(l+864e5-dchNow(),0),864e5):0}
+function dchFmt(ms){const s=Math.ceil(ms/1000);return[Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(x=>String(x).padStart(2,'0')).join(':')}
+function dchRoll(u){const lv=level(pts(u)),un=UNL(u),la=AVS.map((a,i)=>i).filter(i=>lv<AVS[i][1]&&!un.has('a'+i)),lf=FRS.map((f,i)=>i).filter(i=>lv<FRS[i][1]&&!un.has('f'+i));
+  if(Math.random()<.3&&(la.length||lf.length)){const useA=la.length&&(!lf.length||Math.random()<.6),i=pick(useA?la:lf);return{t:'cos',id:(useA?'a':'f')+i,big:useA?AVS[i][0]:'🖼️',txt:useA?'صورة رمزية جديدة':'إطار جديد «'+FRS[i][0]+'»'}}
+  const n=pick(DCH_PTS);return{t:'pts',n,big:n>=20?'💎':n>=15?'🏅':n>=10?'⭐':'💰',txt:'+'+n+' نقطة'}}
+function dchCard(){const u=me();if(!u||u.teacher)return '';const r=dchLeft(u);
+  if(r<=0)return '<div class="card chest dch ready"><span class="cx">🎁</span><div style="flex:1"><b>صندوق الـ 24 ساعة جاهز!</b><div class="mute">5 أو 10 أو 15 أو 20 نقطة، أو شكل جديد. افتحه 👇</div></div><button onclick="dchOpen()">افتح الصندوق</button></div>';
+  return '<div class="card chest dch"><span class="cx">🎁</span><div class="mute">صندوق الـ 24 ساعة الجاي بعد <b id="dchT" dir="ltr">'+dchFmt(r)+'</b></div></div>'}
+function burst(a){for(let i=0;i<26;i++){const e=document.createElement('i'),g=Math.random()*6.283,d=90+Math.random()*170;e.className='bx';e.textContent=pick(a);e.style.cssText='--dx:'+Math.round(Math.cos(g)*d)+'px;--dy:'+Math.round(Math.sin(g)*d)+'px;--r:'+Math.round(Math.random()*540-270)+'deg;animation-delay:'+(Math.random()*.25).toFixed(2)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),1900)}}
+function dchOpen(){const u=me();if(!u||u.teacher)return;if((+((u.pf||{}).dc)||0)&&dchLeft(u)>0)return;
+  const ts=dchNow(),lv0=level(pts(u)),r=dchRoll(u),p={};u.pf=u.pf||{};u.pf.dc=ts;p['pf/dc']=ts;
+  if(r.t==='pts'){u.game=u.game||{};const k='dc'+ts;u.game[k]=r.n;p['game/'+k]=r.n}
+  else{const nu=[...UNL(u),r.id].join(',');u.pf.un=nu;p['pf/un']=nu}
+  DB.save(p);render();fxSound('chest');confetti();burst(['🎁','⭐','✨','💰','🌟']);
+  const old=$('#chOv');if(old)old.remove();
+  const o=document.createElement('div');o.id='chOv';o.className='dchrv';o.innerHTML='<div class="lvbox" style="--c:#ffc83d;--c2:#ff8a3d"><div class="lvem">'+r.big+'</div><div class="lvk">24H CHEST</div><div class="lvt" style="margin-top:10px">'+r.txt+'</div><div class="mute">'+(r.t==='cos'?'اتفتحت في «🎨 تخصيص»':'اتضافت لنقطك')+'<br>الصندوق الجاي بعد 24 ساعة</div></div>';
+  o.onclick=()=>o.remove();document.body.appendChild(o);setTimeout(()=>o.remove(),4600);
+  const lv1=level(pts(u));if(lv1>lv0)setTimeout(()=>lvlUp(lv1),4700)}
+setInterval(()=>{try{const e=document.getElementById('dchT');if(!e||!S.user)return;const u=me();if(!u)return;const r=dchLeft(u);if(r<=0)render();else e.textContent=dchFmt(r)}catch(x){}},1000);
+(function(){const o=lvlUp;lvlUp=function(lv){o.apply(this,arguments);if(lv>=21)burst(['✨','⭐','💫','🌟'])}})();
 /* ---- تخصيص الصورة والإطار واللقب ---- */
 let PFD=null;
 function profOpen(){const u=me();if(!u||u.teacher)return;const f=PF(u);PFD={av:f.av===undefined?-1:+f.av,fr:+f.fr||0,ti:+f.ti||0};profPaint()}
@@ -2104,7 +2202,7 @@ function profSave(){if(!PFD)return;pfSave({av:PFD.av,fr:PFD.fr,ti:PFD.ti});profC
 (function(){const o=studentView;studentView=function(){let h=o.apply(this,arguments);const u=me(),f=PF(u),T=tier(level(pts(u))),S2=f.ti&&f.ti<=T.i?tier(f.ti):T,av=AVS[f.av];
   h=h.replace(/<span class="av g(\d)"([^>]*)>([^<]*)<\/span>/,(m,g,a,c)=>'<span class="av g'+g+' fr-'+(+f.fr||0)+(av?' has-av':'')+'"'+a+'>'+(av?av[0]:c)+'</span>');
   if(S2!==T)h=h.replace(/(<span class="ttl g\d"[^>]*>)([^<]*)(<\/span>)/,(m,a,b,c)=>a+S2.e+' '+S2.t+c);
-  return h.replace('<div class="tabs">',()=>rivalCard()+chestCard()+'<div class="tabs">')}})();
+  return h.replace('<div class="tabs">',()=>rivalCard()+chestCard()+dchCard()+'<div class="tabs">')}})();
 
 /* ---- جولة تعريفية ---- */
 let TOUR=null;
